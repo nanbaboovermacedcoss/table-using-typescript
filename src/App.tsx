@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { type } from 'os';
+import React, { useEffect, useState } from 'react';
+import Tabledata from './components/table';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [emptyarray, setEmptyarray]=useState<Array<Array<string | number>>>([]);
+
+  let arr:Array<Array<string | number>> = [];
+  useEffect(() => {
+    fetch(
+        "https://raw.githubusercontent.com/FEND16/movie-json-data/master/json/top-rated-indian-movies-01.json")
+        .then((res) => res.json())
+        .then((json) => {
+            for (let i in json) {
+                arr.push([
+                    json[i].title,
+                    json[i].actors,
+                    json[i].imdbRating,
+                    json[i].year,
+                    <img src={json[i].posterurl} height="100" width="150" />
+                ]);
+            }
+            setEmptyarray(arr);
+
+        });
+}, []);
+ 
+  return <>
+     <Tabledata
+     columns={[
+      'Title',
+      'Actors',
+      'Rating',
+      'Year',
+      'Image'
+  ]}
+  rows={emptyarray}
+     />   
+  </>
 }
 
 export default App;

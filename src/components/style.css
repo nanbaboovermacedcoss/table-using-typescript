@@ -1,0 +1,26 @@
+h1 {
+  text-align: center;
+  color: orange;
+}
+table,
+tr,
+th,
+td {
+  border: 1px solid rgb(167, 160, 160);
+}
+table {
+  border-collapse: collapse;
+  margin: auto;
+}
+th {
+  background-color: brown;
+  color: white;
+  padding: 20px;
+}
+
+tr:nth-child(even) {
+  background: rgba(166, 194, 100, 0.801);
+}
+tr:nth-child(odd) {
+  background: #8faa5ebb;
+}
